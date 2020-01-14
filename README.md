@@ -12,4 +12,4 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 
 
 ## Acerca De
-[@joseluisgonsan](https://twitter.com/joseluisgonsan)
+José Luis González Sánchez: [@joseluisgonsan](https://twitter.com/joseluisgonsan)
