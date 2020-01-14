@@ -5,7 +5,7 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 * H2 como base de datos embebida, con el objetivo de no hacer necesario otro SGDB externo y crearlo. Comodidad. Luego se puede cambiar rapidamente pues es trasparente para el resto.
 * Spring Security
 * Spring Sessions de manera nativa, fácilmente cambiable a Redis
-* Thyemeleaf
+* Thymeleaf
 * Bootstrapt
 * jQuery
 
