@@ -8,3 +8,5 @@ Tyemeleaf
 
 14/01/2020
 Inicio del proyecto y configuración del mismo
+
+@joseluisgonsan: http://twitter.com/joseluisgonsan
