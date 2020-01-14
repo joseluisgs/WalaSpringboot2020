@@ -13,5 +13,5 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 * 14/01/2020: Inicio del proyecto y configuración del mismo
 
 
-## Acerca De
+## Acerca de
 José Luis González Sánchez: [@joseluisgonsan](https://twitter.com/joseluisgonsan)
