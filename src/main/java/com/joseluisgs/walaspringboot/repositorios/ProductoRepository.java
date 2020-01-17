@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 // Respositorio de operaciones DAO/CRUD de Usuario
-public interface ProductoRepositorio extends JpaRepository<Producto, Long> {
+public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     // Añadimos las siguientes oprraciones a parte de las propias CRUD y Paginación por defecto implementadas
 

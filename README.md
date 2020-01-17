@@ -9,11 +9,15 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 
 
 ### Desarrollo
-* 14/01/2020: Inicio del proyecto y configuración del mismo
+* 14/01/2020: Inicio del proyecto y configuración del mismo: application.properties
+* 14/01/2020: Configuracion de pomxm. H2, seguridad, webjars
 * 17/01/2020: Modelos, Repositorios
+* 17/01/2020: Configuracion de la seguridad: SeguridadConfig y UserDetailsImpl
+* 17/01/2020: Servicios: Usuario, Producto, Compra
 
 ##### Ejecución
 http://localhost:8080
+H2: http://localhost:8080/h2-console. user:sa, db: jdbc:h2:./walaspringboot
 
 
 ##### Administracion
