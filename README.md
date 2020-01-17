@@ -10,7 +10,7 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 
 ### Desarrollo
 * 14/01/2020: Inicio del proyecto y configuración del mismo
-* 17/01/2020: Modelos
+* 17/01/2020: Modelos, Repositorios
 
 ##### Ejecución
 http://localhost:8080
