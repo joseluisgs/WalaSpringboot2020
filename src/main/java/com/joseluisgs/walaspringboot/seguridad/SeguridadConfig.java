@@ -46,8 +46,9 @@ public class SeguridadConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 // Indicamos los path o rutas que permitimos conectarse sin loguarse
+                // Ojo hay que meter los CSS, imagenes y cosas estaticas
                 .authorizeRequests()
-                    .antMatchers("/", "/webjars/**", "/css/**", "/h2-console/**", "/public/**", "/auth/**", "/files/**").permitAll()
+                    .antMatchers("/", "/webjars/**","/images/**", "/css/**", "/h2-console/**", "/public/**", "/auth/**", "/files/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
 

@@ -14,6 +14,7 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 * 17/01/2020: Modelos, Repositorios
 * 17/01/2020: Configuracion de la seguridad: SeguridadConfig y UserDetailsImpl
 * 17/01/2020: Servicios: Usuario, Producto, Compra
+* 18/01/2020: Plantillas, estilos y Fragmentos de Plantillas en index.html. Recursos estaticos (actualizada dir de seguridad)
 
 ##### Ejecución
 http://localhost:8080
