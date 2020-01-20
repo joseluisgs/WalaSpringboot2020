@@ -38,7 +38,7 @@ public class WalaSpringBootApplication {
     public CommandLineRunner initData(UsuarioRepository usuarioRepository, ProductoRepository productoRepository) {
         return args -> {
 
-            Usuario usuario = new Usuario("Jose Luis", "González Sánchez", null, "joseluisgs", "joseluisgs");
+            Usuario usuario = new Usuario("Prueba", "Probando Mucho", null, "prueba", "prueba");
             usuario = usuarioRepository.save(usuario);
 
             productoRepository.saveAll(Arrays.asList(
@@ -64,7 +64,7 @@ public class WalaSpringBootApplication {
     public CommandLineRunner initData(UsuarioServicio usuarioServicio, ProductoServicio productoServicio) {
         return args -> {
 
-            Usuario usuario = new Usuario("José Luis", "González Sánchez", null, "joseluisgs@joseluisgs.com", "joseluisgs");
+            Usuario usuario = new Usuario("Prueba", "Probando Mucho", null, "prueba@prueba.com", "prueba");
             usuario = usuarioServicio.registrar(usuario);
 
             Usuario usuario2 = new Usuario("Victor", "Moralez", null, "victor@morales.es", "antonio");

@@ -6,18 +6,23 @@ import com.joseluisgs.walaspringboot.modelos.Usuario;
 import com.joseluisgs.walaspringboot.servicios.CompraServicio;
 import com.joseluisgs.walaspringboot.servicios.ProductoServicio;
 import com.joseluisgs.walaspringboot.servicios.UsuarioServicio;
+import com.joseluisgs.walaspringboot.utilidades.GeneradorPDF;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/app") // Ruta por defecto base donde vamos a escuchar
@@ -38,6 +43,9 @@ public class CompraController {
     // Para las sesiones
     @Autowired
     HttpSession session;
+
+    // Para PDF
+
 
     // Para mapear el usuario identificado con lo que tenemos almacenado
     private Usuario usuario;
@@ -176,5 +184,28 @@ public class CompraController {
         // Devolvemos la factura
         return "/app/compra/factura";
     }
+
+    // Saco una factura en PDF
+    @RequestMapping(value = "/compra/factura/pdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> facturaPDF(@PathVariable Long id) {
+        // Recupero la compra mediante su ID
+        Compra compra = compraServicio.buscarPorId(id);
+        // Obtengo la lista de productos por su id asociados a la compra
+        List<Producto> productos = productoServicio.productosDeUnaCompra(compra);
+        // Total de la compra
+        Double total = productos.stream().mapToDouble(p -> p.getPrecio()).sum();
+
+        ByteArrayInputStream bis = GeneradorPDF.factura2PDF(compra, productos, total);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=factura_"+ compra.getId()+".pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+    }
+
 
 }

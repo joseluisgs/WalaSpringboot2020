@@ -16,16 +16,16 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 * 17/01/2020: Servicios: Usuario, Producto, Compra
 * 18/01/2020: Plantillas, estilos y Fragmentos de Plantillas en index.html. Recursos estaticos (actualizada dir de seguridad)
 * 20/01/2020: Platilla Carrusel, Login, Registro (2 en uno con JS), Producto, todo lo relacionado con compra.
-* 20/01/2020: Controladores: LoginController, ZonaPublica (listado y ficha de producto), CompraController
+* 20/01/2020: Controladores: LoginController, ZonaPublica (listado y ficha de producto), CompraController (con PDF)
 
 ##### Ejecución
 http://localhost:8080
 H2: http://localhost:8080/h2-console. user:sa, db: jdbc:h2:./walaspringboot
 
 
-##### Administracion
-+ usuario: admin
-+ pass: admin
+##### Usuario de ejemplo
+usuario: prueba@prueba.com
+pass: prueba
 
 
 ## Acerca de
