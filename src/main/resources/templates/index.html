@@ -4,7 +4,9 @@
 <!-- Indicamos que vamos a usar las extensiones de seguridad desde webjars -->
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
+
+<!-- Plantilla de cabecera, misma idea que el resto, mirar navbar y pie-->
+<head th:replace="fragments/head :: head" >
 <title>Wala SpringBoot</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,8 +29,10 @@
 
 </head>
 <body>
-<!-- Barra hecha con fragments, ver la explicación del footer, es la misma
+<!-- Barra hecha con fragments, ver la explicación del footer, es la misma en /fragments/navbar
 <!-- La barra la fijamos-->
+<!-- De hecho la dejo aquí para que se haga uno una idea, lo mismo que el pie, pero en el resto las quito
+y los comentarios seguros están en los fragment de su funcionamietno -->
 <nav  th:replace="fragments/navbar :: navbar" class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -77,20 +81,19 @@
 	</div>
 </nav>
 
-<!-- Formulario de dalir -->
-<form th:action="@{/auth/logout}" method="POST" id="logoutForm"></form>
+<!-- Empieza el grueso propio de la página -->
 
-	<div class="jumbotron">
-		<div class="container text-center">
-			<h1>Wala Springboot</h1>
-		</div>
-	</div>
+<!-- Pongo un carrusel -->
+<div th:replace="fragments/carrusel :: carrusel" class="container">
 
-<img src="/images/fondo.jpg" th:src="@{/images/fondo.jpg}" width="70%" />
+</div>
+
+<!-- Ejemplo de como poner una imagen -->
+<!--<img src="/images/fondo.jpg" th:src="@{/images/fondo.jpg}" width="70%" />-->
 
 	<div class="container">
 		<div class="row">
-			<!-- Recorremos todos los productos -->
+			<!-- Recorremos todos los productos: Foreach -->
 			<div class="col-lg-4" th:each="producto : ${productos}">
 
 				<div class="panel panel-default panel-producto">
@@ -111,9 +114,9 @@
 					<div class="panel-footer">
 						<div class="row">
 							<div class="col-md-6 precio">
-								<!-- Colocamos el percio formateado por lugar -->
-								<span class="precio"
-									th:text="${#numbers.formatCurrency(producto.precio)}"></span>
+								<!-- Colocamos el percio formateado por lugar Como no me sale he hecho lo quito-->
+								<!-- <span class="precio" th:text="${#numbers.formatCurrency(producto.precio)}"></span>-->
+								<span class="precio" th:text="${producto.precio}"></span><span class="precio"> €</span>
 							</div>
 							<!-- Si está autenticado y su nombre de utenticación es distinto al email del propietario
 							del producto, entonces los añadimos, es decir, el producto no me pertenece -->
@@ -143,22 +146,7 @@
 	Por eso se ve una cosa en la vista previa y otra al ejecutarse si quisesemos
 	Para demostrarlo fijate que he cambiado el nombre del autor y esas cosas-->
 
-	<footer th:replace="fragments/footer :: footer" class="navbar-inverse navbar-fixed-bottom">
-		<div class="p-3 mb-2 bg-secondary text-white">
-			<div class="container">
-				<!-- Copyright -->
-				<div class="footer-copyright text-center py-3" style="color:#9d9d9d";>2019-2020 Implatación de Aplicaciones Web:
-					<a style="color:#9d9d9d"; href="https://twitter.com/joseluisgonsan"> José Luis González Sánchez</a>
-				</div>
-				<div class="footer-copyright text-center py-3">
-					<a style="color:#9d9d9d"; href="http://www.cifpvirgendegracia.com/"> CIFP Virgen de Gracia</a>
-				</div>
-				<div class="footer-copyright text-center py-3" style="color:#9d9d9d";>Paseo de San Gragorio 82b. 13500 Puertollano (Ciudad Real).
-				</div>
-				<!-- Copyright -->
-			</div>
-		</div>
-	</footer>
+	<footer th:insert="fragments/footer :: footer" class="navbar-inverse navbar-fixed-bottom"></footer>
 
 
 	<!-- Script al final para agilizar la carga. Se leen de webjars tambien -->

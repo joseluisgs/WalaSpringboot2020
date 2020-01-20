@@ -10,15 +10,21 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 @SpringBootApplication
 public class WalaSpringBootApplication {
 
+
+
     public static void main(String[] args) {
+        Locale.setDefault(new Locale("es", "ES"));
         SpringApplication.run(WalaSpringBootApplication.class, args);
     }
 
@@ -64,7 +70,7 @@ public class WalaSpringBootApplication {
 
 
             List<Producto> listado = Arrays.asList(new Producto("Bicicleta de montaña", 100.0f,
-                            "https://www.decathlon.es/media/835/8350582/big_23c25284-2810-415d-8bcc-e6bebdb536fc.jpg", usuario),
+                            "https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201809/20/00108451997269____4__640x640.jpg", usuario),
                     new Producto("Golf GTI Serie 2", 2500.0f,
                             "https://www.minicar.es/large/Volkswagen-Golf-GTi-G60-Serie-II-%281990%29-Norev-1%3A18-i22889.jpg",
                             usuario),

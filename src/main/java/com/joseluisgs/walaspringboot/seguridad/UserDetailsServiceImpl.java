@@ -9,8 +9,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-
+// Indicamos que es uns ervicio de detalles de usuario
+@Service("userDetailsService") // Es muy importante esta línea para decir que vamos a usar el servicio de usuarios Spring
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     // Indicamos que vamos a usar el repositorio de UsuarioRepository

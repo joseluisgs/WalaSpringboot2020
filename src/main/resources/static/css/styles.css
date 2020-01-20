@@ -15,11 +15,6 @@ Para cosas particulares y para estilos propios usados en https://bootsnipp.com/
     margin-bottom: 0;
 }
 
-/* Add a gray background color and some padding to the footer */
-footer {
-    background-color: #f2f2f2;
-    padding: 25px;
-}
 
 @media (min-width: 1200px) {
     .container {
@@ -62,7 +57,6 @@ footer {
     border-top: 2px solid;
 }
 
-/** Slider **/
 /** Slider **/
 .main-text
 {
