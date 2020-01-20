@@ -29,7 +29,14 @@
                 <!-- Solo si es está autenticado mostramos los elementos -->
                 <li sec:authorize="isAuthenticated()">
                     <!-- Ruta al carrito -->
-                    <a th:href="@{/app/carrito}">
+                    <a th:href="@{/app/carrito}" >
+
+                        <!-- Items del crrito. Ver Controlador Compra para entenderlo -->
+                        <!-- Haciendo uso del modelo que recibe, con la variable items_carrito de dicho modelo. -->
+                        <!--<font th:text="${items_carrito}" color='darksalmon'></font>-->
+                        <!-- Haciendo uso de la sesion. -->
+                        <font th:text="${session.items_carrito}" th:unless="${session == null}" color='darksalmon'></font>
+
                         <span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
                 <li sec:authorize="!isAuthenticated()">
                     <!-- Ruta a login -->
@@ -53,9 +60,6 @@
             </form>
         </div>
     </div>
-
     <!-- Formulario de dalir -->
     <form th:action="@{/auth/logout}" method="POST" id="logoutForm"></form>
-
-
 </nav>

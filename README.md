@@ -15,8 +15,8 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 * 17/01/2020: Configuracion de la seguridad: SeguridadConfig y UserDetailsImpl
 * 17/01/2020: Servicios: Usuario, Producto, Compra
 * 18/01/2020: Plantillas, estilos y Fragmentos de Plantillas en index.html. Recursos estaticos (actualizada dir de seguridad)
-* 20/01/2020: Platilla Carrusel, Login, Registro (2 en uno con JS), Producto (implementa su crud)
-* 20/01/2020: Controladores: LoginController, ZonaPublica (listado y ficha de producto)
+* 20/01/2020: Platilla Carrusel, Login, Registro (2 en uno con JS), Producto, todo lo relacionado con compra.
+* 20/01/2020: Controladores: LoginController, ZonaPublica (listado y ficha de producto), CompraController
 
 ##### Ejecución
 http://localhost:8080

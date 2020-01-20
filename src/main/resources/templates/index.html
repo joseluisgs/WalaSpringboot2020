@@ -48,15 +48,15 @@ y los comentarios seguros están en los fragment de su funcionamietno -->
 			<ul class="nav navbar-nav">
 				<li class="active"><a th:href="@{/}">Inicio</a></li>
 				<li sec:authorize="isAuthenticated()">
-					<a th:href="@{/app/misproductos}">Mis Productos</a>
+					<a th:href="@{/templates/app/misproductos}">Mis Productos</a>
 				</li>
 				<li sec:authorize="isAuthenticated()">
-					<a th:href="@{/app/miscompras}">Mis Compras</a>
+					<a th:href="@{/templates/app/miscompras}">Mis Compras</a>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li sec:authorize="isAuthenticated()"><a
-						th:href="@{/app/carrito}"><span
+						th:href="@{/templates/app/carrito}"><span
 						class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
 				<li sec:authorize="!isAuthenticated()"><a
 						th:href="@{/auth/login}"><span
@@ -114,9 +114,9 @@ y los comentarios seguros están en los fragment de su funcionamietno -->
 					<div class="panel-footer">
 						<div class="row">
 							<div class="col-md-6 precio">
-								<!-- Colocamos el percio formateado por lugar Como no me sale he hecho lo quito-->
-								<!-- <span class="precio" th:text="${#numbers.formatCurrency(producto.precio)}"></span>-->
-								<span class="precio" th:text="${producto.precio}"></span><span class="precio"> €</span>
+								<!-- Colocamos el percio formateado por pais -->
+								<span class="precio" th:text="${#numbers.formatCurrency(producto.precio)}"></span>
+								<!--<span class="precio" th:text="${producto.precio}"></span><span class="precio"> €</span>-->
 							</div>
 							<!-- Si está autenticado y su nombre de utenticación es distinto al email del propietario
 							del producto, entonces los añadimos, es decir, el producto no me pertenece -->

@@ -37,12 +37,12 @@
 					<div class="pull-right">
 						<h4>
 							<!-- Me falla el formato de la moneda -->
-							<!-- <strong th:text="${#numbers.formatCurrency(producto.precio)}"></strong>-->
-							<strong th:text="${producto.precio}"></strong><strong> €</strong>
+							<strong th:text="${#numbers.formatCurrency(producto.precio)}"></strong>
+							<!--<strong th:text="${producto.precio}"></strong><strong> €</strong>-->
 						</h4>
 					</div>
 					<!-- Enlace al carrito -->
-					<a th:href="@{/app/carrito/add/{id}(id=${producto.id})}" 
+					<a th:href="@{/templates/app/carrito/add/{id}(id=${producto.id})}"
 					type="button" class="btn btn-lg btn-success btn-product" sec:authorize="isAuthenticated()"
 								th:if="${#authentication.name != producto.propietario.email}">
 						<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Comprar
