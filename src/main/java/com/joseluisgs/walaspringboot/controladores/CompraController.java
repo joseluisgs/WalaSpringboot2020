@@ -7,9 +7,11 @@ import com.joseluisgs.walaspringboot.servicios.CompraServicio;
 import com.joseluisgs.walaspringboot.servicios.ProductoServicio;
 import com.joseluisgs.walaspringboot.servicios.UsuarioServicio;
 import com.joseluisgs.walaspringboot.utilidades.GeneradorPDF;
+import com.joseluisgs.walaspringboot.utilidades.Html2PdfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,10 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/app") // Ruta por defecto base donde vamos a escuchar
@@ -45,6 +44,9 @@ public class CompraController {
     HttpSession session;
 
     // Para PDF
+    @Autowired
+    Html2PdfService documentGeneratorService;
+
 
 
     // Para mapear el usuario identificado con lo que tenemos almacenado
@@ -185,7 +187,7 @@ public class CompraController {
         return "/app/compra/factura";
     }
 
-    // Saco una factura en PDF
+    // Saco una factura en PDF usando itex
     @RequestMapping(value = "/compra/factura/pdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> facturaPDF(@PathVariable Long id) {
         // Recupero la compra mediante su ID
@@ -205,6 +207,37 @@ public class CompraController {
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(bis));
+    }
+
+    // Saco la factura generada con el servicio, le cambio el PATH
+    @RequestMapping(value = "/compra/pdf/factura/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity facturaHTML2PDF(@PathVariable Long id) {
+        // Cargamos los datos
+        // Recupero la compra mediante su ID
+        Compra compra = compraServicio.buscarPorId(id);
+        // Obtengo la lista de productos por su id asociados a la compra
+        List<Producto> productos = productoServicio.productosDeUnaCompra(compra);
+        // Total de la compra
+        Double total = productos.stream().mapToDouble(p -> p.getPrecio()).sum();
+
+        Map<String, Object> data = new TreeMap<>();
+        String factura = "factura_"+ compra.getId();
+        data.put("factura", factura);
+        data.put("compra", compra);
+        data.put("productos", productos);
+        data.put("total", total);
+        data.put("subtotal", (total/1.21));
+        data.put("iva", (total-(total/1.21)));
+
+        InputStreamResource resource = documentGeneratorService.html2PdfGenerator(data);
+        if (resource != null) {
+            return ResponseEntity
+                    .ok()
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(resource);
+        } else {
+            return new ResponseEntity(HttpStatus.SERVICE_UNAVAILABLE);
+        }
     }
 
 

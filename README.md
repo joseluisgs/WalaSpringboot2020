@@ -16,7 +16,8 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 * 17/01/2020: Servicios: Usuario, Producto, Compra
 * 18/01/2020: Plantillas, estilos y Fragmentos de Plantillas en index.html. Recursos estaticos (actualizada dir de seguridad)
 * 20/01/2020: Platilla Carrusel, Login, Registro (2 en uno con JS), Producto, todo lo relacionado con compra.
-* 20/01/2020: Controladores: LoginController, ZonaPublica (listado y ficha de producto), CompraController (con PDF)
+* 20/01/2020: Controladores: LoginController, ZonaPublica (listado y ficha de producto), CompraController (con PDF itext)
+* 21/01/2020: Otra forma de hacer PDFs usando Thymeleaf como plantilla del PDF, recomendado
 
 ##### Ejecución
 http://localhost:8080
