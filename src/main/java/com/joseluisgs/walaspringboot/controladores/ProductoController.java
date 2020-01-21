@@ -4,12 +4,14 @@ import com.joseluisgs.walaspringboot.modelos.Producto;
 import com.joseluisgs.walaspringboot.modelos.Usuario;
 import com.joseluisgs.walaspringboot.servicios.ProductoServicio;
 import com.joseluisgs.walaspringboot.servicios.UsuarioServicio;
+import com.joseluisgs.walaspringboot.upload.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.util.List;
 
@@ -17,13 +19,19 @@ import java.util.List;
 @RequestMapping("/app") // Ruta por defecto
 public class ProductoController {
 
+    // Servicio de producto
     @Autowired
     ProductoServicio productoServicio;
 
+    // Servicio de usuario
     @Autowired
     UsuarioServicio usuarioServicio;
 
     private Usuario usuario;
+
+    // Servicio de almacenamiento
+    @Autowired
+    StorageService storageService;
 
     // Inyectamos en el modelo automáticamente la lista de mis productos
     @ModelAttribute("misproductos")
@@ -64,13 +72,11 @@ public class ProductoController {
     @PostMapping("/producto/nuevo/submit")
     public String nuevoProductoSubmit(@ModelAttribute Producto producto, @RequestParam("file") MultipartFile file) {
         // Subimos las imagenes
-        /*
         if (!file.isEmpty()) {
             String imagen = storageService.store(file);
             producto.setImagen(MvcUriComponentsBuilder
                     .fromMethodName(FilesController.class, "serveFile", imagen).build().toUriString());
         }
-        */
         // Indicamos el propietario
         producto.setPropietario(usuario);
         //nsertamos

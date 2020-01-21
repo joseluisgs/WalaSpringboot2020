@@ -6,9 +6,12 @@ import com.joseluisgs.walaspringboot.repositorios.ProductoRepository;
 import com.joseluisgs.walaspringboot.repositorios.UsuarioRepository;
 import com.joseluisgs.walaspringboot.servicios.ProductoServicio;
 import com.joseluisgs.walaspringboot.servicios.UsuarioServicio;
+import com.joseluisgs.walaspringboot.upload.StorageProperties;
+import com.joseluisgs.walaspringboot.upload.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.web.servlet.LocaleContextResolver;
@@ -19,6 +22,16 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+
+/**
+ * EnableAutoConfiguration: le dice a Spring Boot que comience a agregar beans según la configuración de classpath,
+ * otros beans y varias configuraciones de propiedades.
+ * Por ejemplo, si spring-webmvc está en el classpath, esta anotación marca la aplicación como una aplicación web y
+ * activa comportamientos clave, como configurar un DispatcherServlet o saber donde buscar las propiedades de Almacenamiento.
+ */
+@EnableConfigurationProperties(StorageProperties.class)
+
 
 @SpringBootApplication
 public class WalaSpringBootApplication {
@@ -84,6 +97,21 @@ public class WalaSpringBootApplication {
             listado.forEach(productoServicio::insertar);
 
 
+        };
+    }
+
+    /**
+     * Este bean se inicia al lanzar la aplicación. Nos permite inicializar el almacenamiento
+     * secundario del proyecto
+     *
+     * @param storageService Almacenamiento secundario del proyecto
+     * @return
+     */
+    @Bean
+    CommandLineRunner init(StorageService storageService) {
+        return (args) -> {
+            storageService.deleteAll();
+            storageService.init();
         };
     }
 
