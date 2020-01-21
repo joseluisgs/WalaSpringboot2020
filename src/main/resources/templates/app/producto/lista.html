@@ -13,8 +13,9 @@
 
 	<div class="container">
 		<div class="row">
+			<!-- Botón de nuevo-->
 			<div class="col-md-offset-10 col-md-2" style="margin-bottom: 20px;">
-				<a th:href="@{/templates/app/producto/nuevo}" class="btn btn-lg btn-info">Nuevo producto</a>
+				<a th:href="@{/app/producto/nuevo}" class="btn btn-lg btn-info">Nuevo producto</a>
 			</div>
 		</div>
 		<div class="row">
@@ -22,12 +23,16 @@
 
 				<div class="panel panel-default panel-producto">
 					<div class="panel-heading">
-						<span th:text="${producto.nombre}">NOMBRE DEL PRODUCTO</span> <a
+						<!-- Producto-->
+						<span th:text="${producto.nombre}">NOMBRE DEL PRODUCTO</span>
+						<!-- Esquinita de borrar -->
+						<a
 							th:if="${producto.compra == null}" data-toggle="modal"
 							data-target="#delete-modal" th:data-id="${producto.id}"
 							class="close" aria-label="close">&times;</a>
 					</div>
 					<div class="panel-body">
+						<!-- Imagen -->
 						<img
 							th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/350x260' : ${producto.imagen}"
 							class="img-responsive center-block" alt="Image"
@@ -35,13 +40,15 @@
 					</div>
 					<div class="panel-footer">
 						<div class="row">
-							<div class="col-md-9 precio">
+							<div class="col-md-8 precio">
+								<!-- Precio-->
 								<span class="precio"
 									th:text="${#numbers.formatCurrency(producto.precio)}"></span>
 							</div>
 							<div class="col-md-3">
 
 								<h4>
+									<!-- Estado-->
 									<span th:if="${producto.compra != null} "
 										class="label label-success">Vendido</span> <span
 										th:unless="${producto.compra != null} "
