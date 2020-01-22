@@ -15,7 +15,7 @@
 		<div class="row">
 			<!-- Botón de nuevo-->
 			<div class="col-md-offset-10 col-md-2" style="margin-bottom: 20px;">
-				<a th:href="@{/app/producto/nuevo}" class="btn btn-lg btn-info">Nuevo producto</a>
+				<a th:href="@{/app/misproducto/nuevo}" class="btn btn-lg btn-info">Nuevo producto</a>
 			</div>
 		</div>
 		<div class="row">
@@ -33,26 +33,38 @@
 					</div>
 					<div class="panel-body">
 						<!-- Imagen -->
-						<img
-							th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/350x260' : ${producto.imagen}"
-							class="img-responsive center-block" alt="Image"
-							style="height: 300px;">
+							<img th:src="${#strings.isEmpty(producto.imagen)} ? 'http://placehold.it/350x260' : ${producto.imagen}"
+									class="img-responsive center-block" alt="Image" style="height: 300px;">
+
 					</div>
 					<div class="panel-footer">
 						<div class="row">
-							<div class="col-md-8 precio">
+							<div class="col-md-4 precio">
 								<!-- Precio-->
 								<span class="precio"
 									th:text="${#numbers.formatCurrency(producto.precio)}"></span>
 							</div>
-							<div class="col-md-3">
+
+							<div class="col-md-4">
+								<!-- Estado -->
+								<h4>
+								<span th:if="${producto.compra != null} "
+									  class="label label-success">Vendido</span> <span
+									th:unless="${producto.compra != null} "
+									class="label label-info">Sin vender</span>
+								</h4>
+							</div>
+
+
+
+							<div class="col-md-4">
 
 								<h4>
-									<!-- Estado-->
-									<span th:if="${producto.compra != null} "
-										class="label label-success">Vendido</span> <span
-										th:unless="${producto.compra != null} "
-										class="label label-info">Sin vender</span>
+									<!-- Editar -->
+									<a href th:href="@{/app/misproductos/editar/{id}(id=${producto.id})}">
+									<span th:if="${producto.compra == null} "
+										class="label label-warning">Editar</span>
+									</a>
 								</h4>
 
 							</div>
@@ -108,7 +120,7 @@
 				var modal = $(this);
 
 				var a = modal.find('.modal-body a')[0];
-				a.href = '/app/misproductos/' + data + '/eliminar';
+				a.href = '/app/misproductos/eliminar/' + data;
 				
 
 			});

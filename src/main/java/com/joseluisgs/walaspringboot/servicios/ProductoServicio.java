@@ -4,6 +4,7 @@ import com.joseluisgs.walaspringboot.modelos.Compra;
 import com.joseluisgs.walaspringboot.modelos.Producto;
 import com.joseluisgs.walaspringboot.modelos.Usuario;
 import com.joseluisgs.walaspringboot.repositorios.ProductoRepository;
+import com.joseluisgs.walaspringboot.upload.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,9 @@ public class ProductoServicio {
     @Autowired
     ProductoRepository repositorio;
 
+    @Autowired
+    StorageService storageService;
+
     // Insertar un producto
     public Producto insertar(Producto p) {
         return repositorio.save(p);
@@ -31,8 +35,8 @@ public class ProductoServicio {
 
     // Borrar un producto
     public void borrar(Producto p) {
-        //if (!p.getImagen().isEmpty())
-        //    storageService.delete(p.getImagen());
+        if (!p.getImagen().isEmpty())
+             storageService.delete(p.getImagen());
         repositorio.delete(p);
     }
 

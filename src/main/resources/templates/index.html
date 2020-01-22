@@ -120,6 +120,7 @@ y los comentarios seguros están en los fragment de su funcionamietno -->
 							</div>
 							<!-- Si está autenticado y su nombre de utenticación es distinto al email del propietario
 							del producto, entonces los añadimos, es decir, el producto no me pertenece -->
+
 							<div class="col-md-6" sec:authorize="isAuthenticated()"
 								th:if="${#authentication.name != producto.propietario.email}">
 								<a th:href="@{/app/carrito/add/{id}(id=${producto.id})}" class="pull-right btn btn-success btn-product"><span

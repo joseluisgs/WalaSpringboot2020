@@ -32,7 +32,6 @@ import java.util.Locale;
  */
 @EnableConfigurationProperties(StorageProperties.class)
 
-
 @SpringBootApplication
 public class WalaSpringBootApplication {
 
@@ -80,7 +79,7 @@ public class WalaSpringBootApplication {
             Usuario usuario = new Usuario("Prueba", "Probando Mucho", null, "prueba@prueba.com", "prueba");
             usuario = usuarioServicio.registrar(usuario);
 
-            Usuario usuario2 = new Usuario("Victor", "Moralez", null, "victor@morales.es", "antonio");
+            Usuario usuario2 = new Usuario("Otro", "Usuario", null, "otro@otro.com", "otro");
             usuario2 = usuarioServicio.registrar(usuario2);
 
 
@@ -110,7 +109,9 @@ public class WalaSpringBootApplication {
     @Bean
     CommandLineRunner init(StorageService storageService) {
         return (args) -> {
+            // Borramos todas
             storageService.deleteAll();
+            // iniciamos el directorio
             storageService.init();
         };
     }

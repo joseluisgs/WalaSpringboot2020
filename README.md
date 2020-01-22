@@ -18,6 +18,7 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 * 20/01/2020: Platilla Carrusel, Login, Registro (2 en uno con JS), Producto, todo lo relacionado con compra.
 * 20/01/2020: Controladores: LoginController, ZonaPublica (listado y ficha de producto), CompraController (con PDF itext)
 * 21/01/2020: Otra forma de hacer PDFs usando Thymeleaf como plantilla del PDF, recomendado
+* 22/01/2020: Producto nuevo y modificar si no se ha vendido. Eliminar producto.
 
 ##### Ejecución
 http://localhost:8080
@@ -27,6 +28,8 @@ H2: http://localhost:8080/h2-console. user:sa, db: jdbc:h2:./walaspringboot
 ##### Usuario de ejemplo
 usuario: prueba@prueba.com
 pass: prueba
+usuario: otro@otro.com 
+pass: otro
 
 
 ## Acerca de

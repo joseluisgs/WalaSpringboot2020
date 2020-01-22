@@ -161,7 +161,7 @@ public class CompraController {
         session.removeAttribute("items_carrito");
 
         // Abrimos la factura
-        return "redirect:/app/compra/factura/"+c.getId();
+        return "redirect:/app/miscompras/factura/"+c.getId();
 
     }
 
@@ -172,7 +172,7 @@ public class CompraController {
     }
 
     //Obtiene la factura con un id
-    @GetMapping("/compra/factura/{id}")
+    @GetMapping("/miscompras/factura/{id}")
     public String factura(Model model, @PathVariable Long id) {
         // Recupero la compra mediante su ID
         Compra c = compraServicio.buscarPorId(id);
@@ -188,7 +188,7 @@ public class CompraController {
     }
 
     // Saco una factura en PDF usando itex
-    @RequestMapping(value = "/compra/factura/pdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+    @RequestMapping(value = "/miscompras/factura/pdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> facturaPDF(@PathVariable Long id) {
         // Recupero la compra mediante su ID
         Compra compra = compraServicio.buscarPorId(id);
@@ -210,7 +210,7 @@ public class CompraController {
     }
 
     // Saco la factura generada con el servicio, le cambio el PATH
-    @RequestMapping(value = "/compra/pdf/factura/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
+    @RequestMapping(value = "/miscompras/pdf/factura/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity facturaHTML2PDF(@PathVariable Long id) {
         // Cargamos los datos
         // Recupero la compra mediante su ID
