@@ -79,12 +79,14 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
+            <!-- Version es a usar -->
             <version>3.3.7-1</version>
         </dependency>
 
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
+            <!-- Version es a usar -->
             <version>3.3.1-1</version>
         </dependency>
 
@@ -99,7 +101,7 @@
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
         </dependency>
 
-        <!-- PDF -->
+        <!-- PDF Escribiendo puro-->
         <dependency>
             <groupId>com.lowagie</groupId>
             <artifactId>itext</artifactId>
