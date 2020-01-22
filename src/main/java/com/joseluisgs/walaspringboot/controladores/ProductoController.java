@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -73,18 +74,26 @@ public class ProductoController {
     }
 
     @PostMapping("/misproducto/nuevo/submit")
-    public String nuevoProductoSubmit(@ModelAttribute Producto producto, @RequestParam("file") MultipartFile file) {
-        // Subimos las imagenes
-        if (!file.isEmpty()) {
-            String imagen = storageService.store(file);
-            producto.setImagen(MvcUriComponentsBuilder
-                    .fromMethodName(FilesController.class, "serveFile", imagen).build().toUriString());
+    public String nuevoProductoSubmit(@Valid @ModelAttribute Producto producto,
+                                      @RequestParam("file") MultipartFile file,
+                                      BindingResult bindingResult) {
+
+        // Si no tiene errores
+        if (bindingResult.hasErrors()) {
+            return "app/producto/ficha";
+        }else {
+            // Subimos las imagenes
+            if (!file.isEmpty()) {
+                String imagen = storageService.store(file);
+                producto.setImagen(MvcUriComponentsBuilder
+                        .fromMethodName(FilesController.class, "serveFile", imagen).build().toUriString());
+            }
+            // Indicamos el propietario
+            producto.setPropietario(usuario);
+            //nsertamos
+            productoServicio.insertar(producto);
+            return "redirect:/app/misproductos";
         }
-        // Indicamos el propietario
-        producto.setPropietario(usuario);
-        //nsertamos
-        productoServicio.insertar(producto);
-        return "redirect:/app/misproductos";
     }
 
     // Actualizamos el producto
@@ -101,30 +110,36 @@ public class ProductoController {
     }
 
     @PostMapping("/misproductos/editar/submit")
-    public String editarEmpleadoSubmit(@ModelAttribute("producto") Producto actualProducto, @RequestParam("file") MultipartFile file) {
+    public String editarEmpleadoSubmit(@Valid @ModelAttribute("producto") Producto actualProducto,
+                                       @RequestParam("file") MultipartFile file,
+                                        BindingResult bindingResult) {
+        // Si no tiene errores
+        if (bindingResult.hasErrors()) {
+            return "app/producto/ficha";
+        } else {
+            // Lo que tenga que hacer, buscamos el antiguo producto para sacar los datos
+            Producto p = productoServicio.findById(actualProducto.getId());
+            // Obtenemos el usuario
+            // Porque es el único campo que no le hemos podido pasar al formulario
+            actualProducto.setPropietario(p.getPropietario());
 
-        // Lo que tenga que hacer, buscamos el antiguo producto para sacar los datos
-        Producto p = productoServicio.findById(actualProducto.getId());
-        // Obtenemos el usuario
-        // Porque es el único campo que no le hemos podido pasar al formulario
-        actualProducto.setPropietario(p.getPropietario());
+            // Procesamos las imagenes
+            actualProducto.setImagen(p.getImagen());
+            // Si existe que me han enviado el fichero y que la imagen antigua está almacenada
 
-        // Procesamos las imagenes
-        actualProducto.setImagen(p.getImagen());
-        // Si existe que me han enviado el fichero y que la imagen antigua está almacenada
-
-        // Asignamos la nueva
-        if (!file.isEmpty()) {
-            // Borramos la antigua si se puede si existe en el nuestro directorio
+            // Asignamos la nueva
+            if (!file.isEmpty()) {
+                // Borramos la antigua si se puede si existe en el nuestro directorio
                 storageService.delete(p.getImagen());
-            // Subimos la nueva
-            String imagen = storageService.store(file);
-            actualProducto.setImagen(MvcUriComponentsBuilder
-                    .fromMethodName(FilesController.class, "serveFile", imagen).build().toUriString());
+                // Subimos la nueva
+                String imagen = storageService.store(file);
+                actualProducto.setImagen(MvcUriComponentsBuilder
+                        .fromMethodName(FilesController.class, "serveFile", imagen).build().toUriString());
+            }
+            // Actualizamos el producto
+            productoServicio.editar(actualProducto);
+            return "redirect:/app/misproductos";
         }
-        // Actualizamos el producto
-        productoServicio.editar(actualProducto);
-        return "redirect:/app/misproductos";
     }
 
 

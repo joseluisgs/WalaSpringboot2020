@@ -4,6 +4,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.Objects;
 
@@ -14,8 +16,14 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @NotEmpty
     private String nombre;
+
+    @NotEmpty
     private String apellidos;
+
+
     private String avatar;
 
     // Creamos la fecha para que la maneje internamente con TemporalType
@@ -24,7 +32,9 @@ public class Usuario {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaAlta;
 
+    @Email
     private String email;
+
     private String password;
 
     public Usuario() {

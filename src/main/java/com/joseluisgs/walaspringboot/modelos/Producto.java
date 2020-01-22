@@ -1,6 +1,8 @@
 package com.joseluisgs.walaspringboot.modelos;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 @Entity
@@ -9,8 +11,10 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotEmpty
     private String nombre;
 
+    @Min(value=0, message="{producto.precio.mayorquecero}")
     private float precio;
 
     private String imagen;
