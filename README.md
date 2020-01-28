@@ -23,8 +23,8 @@ Proyecto de como hacer una tienda de segunda mano usando Spring Boot y otras cos
 ##### Ejecución
 http://localhost:8080
 H2: http://localhost:8080/h2-console. 
-*user:sa
-*db: jdbc:h2:./walaspringboot
+* user:sa
+* db: jdbc:h2:./walaspringboot
 
 
 ##### Usuario de ejemplo
